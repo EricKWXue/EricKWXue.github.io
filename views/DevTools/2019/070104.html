@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Git 远程操作 | Eric Blog</title>
+    <meta name="description" content="You&#39;re never wrong to do the right things. ——《The Intern》">
+    <meta name="generator" content="VuePress 1.3.0">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.7438e025.css" as="style"><link rel="preload" href="/assets/js/app.80dadca9.js" as="script"><link rel="preload" href="/assets/js/3.8d698f35.js" as="script"><link rel="preload" href="/assets/js/1.69343bda.js" as="script"><link rel="preload" href="/assets/js/15.f0d2b236.js" as="script"><link rel="prefetch" href="/assets/js/10.9b874fe5.js"><link rel="prefetch" href="/assets/js/11.c2983dcf.js"><link rel="prefetch" href="/assets/js/12.b1a4d0c4.js"><link rel="prefetch" href="/assets/js/13.7f448a9e.js"><link rel="prefetch" href="/assets/js/14.ccf3855f.js"><link rel="prefetch" href="/assets/js/16.c83af9b2.js"><link rel="prefetch" href="/assets/js/17.839cb40a.js"><link rel="prefetch" href="/assets/js/18.1115940d.js"><link rel="prefetch" href="/assets/js/19.c4dda3bf.js"><link rel="prefetch" href="/assets/js/20.2bbd46b0.js"><link rel="prefetch" href="/assets/js/21.dcde838e.js"><link rel="prefetch" href="/assets/js/22.9a913bca.js"><link rel="prefetch" href="/assets/js/4.a6e6cc8c.js"><link rel="prefetch" href="/assets/js/5.bd5d9dcf.js"><link rel="prefetch" href="/assets/js/6.375d7919.js"><link rel="prefetch" href="/assets/js/7.3223de65.js"><link rel="prefetch" href="/assets/js/8.cefec160.js"><link rel="prefetch" href="/assets/js/9.62bf0b03.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.7438e025.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container" data-v-4698c43e><div data-v-4698c43e><div id="loader-wrapper" class="loading-wrapper" data-v-4b73742e data-v-4698c43e data-v-4698c43e><div class="loader-main" data-v-4b73742e><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-6cbeab0a data-v-4698c43e data-v-4698c43e><h3 class="title" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a>Eric Blog</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><input type="password" value="" data-v-6cbeab0a> <span data-v-6cbeab0a>Konck! Knock!</span> <button data-v-6cbeab0a>OK</button></label> <div class="footer" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><span data-v-6cbeab0a><i class="iconfont reco-theme" data-v-6cbeab0a></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-6cbeab0a>vuePress-theme-reco</a></span> <span data-v-6cbeab0a><i class="iconfont reco-copyright" data-v-6cbeab0a></i> <a data-v-6cbeab0a><span data-v-6cbeab0a>Eric Xue</span>
+            
+          <span data-v-6cbeab0a>2020 - </span>
+          2020
+        </a></span></div></div> <div class="hide" data-v-4698c43e><header class="navbar" data-v-4698c43e><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Eric Blog" class="logo"> <span class="site-name">Eric Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Database/" class="nav-link"><i class="iconfont undefined"></i>
+  Database
+</a></li><li class="dropdown-item"><!----> <a href="/categories/DevTools/" class="nav-link"><i class="iconfont undefined"></i>
+  DevTools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Sping/" class="nav-link"><i class="iconfont undefined"></i>
+  Sping
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Threads/" class="nav-link"><i class="iconfont undefined"></i>
+  Threads
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/EricKWXue" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://blog.csdn.net/e_eric12138" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-csdn"></i>
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-4698c43e></div> <aside class="sidebar" data-v-4698c43e><div class="personal-info-wrapper" data-v-6c8ffc9c><img src="/avatar.png" alt="author-avatar" class="personal-img" data-v-6c8ffc9c> <h3 class="name" data-v-6c8ffc9c>
+    Eric Xue
+  </h3> <div class="num" data-v-6c8ffc9c><div data-v-6c8ffc9c><h3 data-v-6c8ffc9c>11</h3> <h6 data-v-6c8ffc9c>文章</h6></div> <div data-v-6c8ffc9c><h3 data-v-6c8ffc9c>4</h3> <h6 data-v-6c8ffc9c>标签</h6></div></div> <hr data-v-6c8ffc9c></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/Database/" class="nav-link"><i class="iconfont undefined"></i>
+  Database
+</a></li><li class="dropdown-item"><!----> <a href="/categories/DevTools/" class="nav-link"><i class="iconfont undefined"></i>
+  DevTools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Sping/" class="nav-link"><i class="iconfont undefined"></i>
+  Sping
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Threads/" class="nav-link"><i class="iconfont undefined"></i>
+  Threads
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/EricKWXue" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://blog.csdn.net/e_eric12138" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-csdn"></i>
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Git 远程操作</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/DevTools/2019/070104.html#git远程操作的基本命令" class="sidebar-link">git远程操作的基本命令</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/DevTools/2019/070104.html#远程协作模型" class="sidebar-link">远程协作模型</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/DevTools/2019/070104.html#git远程分支使用的几种最佳实践" class="sidebar-link">git远程分支使用的几种最佳实践</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-6cbeab0a data-v-4698c43e><h3 class="title" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a>Git 远程操作</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><input type="password" value="" data-v-6cbeab0a> <span data-v-6cbeab0a>Konck! Knock!</span> <button data-v-6cbeab0a>OK</button></label> <div class="footer" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><span data-v-6cbeab0a><i class="iconfont reco-theme" data-v-6cbeab0a></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-6cbeab0a>vuePress-theme-reco</a></span> <span data-v-6cbeab0a><i class="iconfont reco-copyright" data-v-6cbeab0a></i> <a data-v-6cbeab0a><span data-v-6cbeab0a>Eric Xue</span>
+            
+          <span data-v-6cbeab0a>2020 - </span>
+          2020
+        </a></span></div></div> <div data-v-4698c43e><main class="page"><!----> <div class="page-title" style="display:none;"><h1>Git 远程操作</h1> <hr> <div data-v-484a899e><i class="iconfont reco-account" data-v-484a899e><span data-v-484a899e>Eric Xue</span></i> <i class="iconfont reco-date" data-v-484a899e><span data-v-484a899e>2019-07-01</span></i> <!----> <i class="iconfont reco-tag tags" data-v-484a899e><span class="tag-item" data-v-484a899e>
+      git
+    </span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h1 id="git-远程操作"><a href="#git-远程操作" class="header-anchor">#</a> Git 远程操作</h1> <p>git远程操作、远程协作模型、git远程分支的最佳实践</p> <h2 id="git远程操作的基本命令"><a href="#git远程操作的基本命令" class="header-anchor">#</a> git远程操作的基本命令</h2> <p>1.将本地仓库推送到远程</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> remote <span class="token function">add</span> origin http://github.com/aaa/bbb.git
+
+<span class="token function">git</span> push -u origin master
+<span class="token comment">#将本地master分支与远程做关联，下次直接git push就能推送了</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>2.查看所有远程仓库的别名</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> remote show
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>3.查看某个远程仓库的详细信息</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> remote show origin
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>4.重命名远程仓库origin为spring</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> remote <span class="token function">rename</span> origin spring
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>5.删除远程仓库origin</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> remote <span class="token function">rm</span> origin
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>6.设置推送远程的默认行为为simple</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> config --global push.default simple
+
+<span class="token comment">#git2.0版本后可以用，有兴趣可以查阅下simple和matching的区别</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>7.查看所有的分支（包括本地分支和远程分支）</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> branch -a
+<span class="token comment">#远程分支会用红色字体显示</span>
+
+<span class="token function">git</span> branch -av
+<span class="token comment">#-v 输出最后一次提交的信息，包括本地与远程的提前或者落后信息</span>
+
+<span class="token comment">#若确定远程有新分支，本地需要先pull一下，把远程的新分支映射到本地。因为我们当前用git branch -av看到的远程分支只是真实远程分支的一个映射，如origin/master，它只是存储在本地的一个映射。想要更新这个映射，就需要使用git pull这样拉取的命令。</span>
+<span class="token function">git</span> pull
+<span class="token function">git</span> branch -av
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>8.克隆远程仓库到本地</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">git</span> clone http://github.com/aaa/bbb.git
+
+<span class="token comment">#clone会把远程所有的分支全部拉下来，可以用git branch -av命令看所有远程分支，以及当前正使用的远程分支</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>需要注意：git push的完整写法：</p> <p>git push origin src本地分支:dest远程分支</p> <h2 id="远程协作模型"><a href="#远程协作模型" class="header-anchor">#</a> 远程协作模型</h2> <p>1、开发者A与开发者B协同开发某个项目</p> <p>开发者A：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment">#创建好本地仓库，将本地仓库推送到远程</span>
+<span class="token function">git</span> remote <span class="token function">add</span> origin http://github.com/ab/aabb.git
+<span class="token function">git</span> push -u origin master
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>开发者B：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment">#将远程仓库clone到本地</span>
+<span class="token function">git</span> clone http://github.com/ab/aabb.git
+
+<span class="token comment">#开始编程功能B，完成后提交代码到本地</span>
+<span class="token function">git</span> commit -am <span class="token string">'function B'</span>
+
+<span class="token comment">#将本地仓库推送到远程</span>
+<span class="token function">git</span> push
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>开发者A：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment">#查看远程仓库的状态，目前本地相对于远程肯定是过时的（local out of date）</span>
+<span class="token function">git</span> remote show origin
+
+<span class="token comment">#拉取最新的远程代码，git pull相当于git fetch + git merge</span>
+<span class="token function">git</span> pull
+
+<span class="token comment">#编写功能A1，完成后提交代码到本地</span>
+<span class="token function">git</span> commit -am <span class="token string">'function A1'</span>
+
+<span class="token comment">#将本地仓库推送到远程</span>
+<span class="token function">git</span> push
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>开发者B：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment">#编写功能A2，完成后提交代码到本地。 A1和A2功能在同一块代码里</span>
+<span class="token function">git</span> commit -am <span class="token string">'function A2'</span>
+
+<span class="token comment">#将本地仓库推送到远程。此时A1和A2必然冲突，推送失败。</span>
+<span class="token function">git</span> push
+
+<span class="token comment">#拉取最新的远程代码到本地。此时A1和A2自动合并冲突，需要手动merge</span>
+<span class="token function">git</span> pull
+
+<span class="token comment">#假设文件为FuntionA.java，手动merge结束后，提交</span>
+<span class="token function">git</span> <span class="token function">add</span> FuntionA.java
+<span class="token function">git</span> commit -m <span class="token string">'merge finish'</span>
+
+<span class="token comment">#将本地仓库推送到远程（其实推送的是两个提交，原理如下图）</span>
+<span class="token function">git</span> push
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>![1564751190752](/views-img/pull merge.png)</p> <p>为什么origin/master会指向commit1呢？</p> <p>因为origin/master是远程映射到本地的一个分支，在本地存储，原本就指向commit1。当本地pull操作失败后，并没有与同步远程，即：没有修改为commit2。当用户合并冲突后，产生commit4，相对于commit1而言，提前了两次提交。</p> <p>本地pull操作，其实质分为两步：
+1.远程master分支fetch到本地origin/master分支
+2.本地origin/master分支再自动merge到本地master分支
+而pull操作失败，其实是第2步自动merge的时候失败了。</p> <h2 id="git远程分支使用的几种最佳实践"><a href="#git远程分支使用的几种最佳实践" class="header-anchor">#</a> git远程分支使用的几种最佳实践</h2> <p>1、Gitflow</p> <p>2、基于Git远程分支的开发模型：</p> <p>开发分支：develop分支（频繁变化的一个分支）</p> <p>测试分支：test分支（供测试与产品等人员使用的分支，变化不是特别频繁）</p> <p>生产发布分支：master分支（变化非常不频繁的一个分支）</p> <p>BUG修复分支：bugfix(hotfix)分支（生产系统中出现了紧急Bug，用于紧急修复的分支）</p></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----></main> <!----> <div class="comments-wrapper" data-v-4698c43e><!----></div></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-a81d141e data-v-a81d141e><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-a81d141e><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-a81d141e></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-a81d141e></path></svg></div></div></div>
+    <script src="/assets/js/app.80dadca9.js" defer></script><script src="/assets/js/3.8d698f35.js" defer></script><script src="/assets/js/1.69343bda.js" defer></script><script src="/assets/js/15.f0d2b236.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL高可用 | Eric Blog</title>
+    <meta name="description" content="You&#39;re never wrong to do the right things. ——《The Intern》">
+    <meta name="generator" content="VuePress 1.3.0">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.807e3e1f.css" as="style"><link rel="preload" href="/assets/js/app.cda6d5d2.js" as="script"><link rel="preload" href="/assets/js/3.e2fc40bf.js" as="script"><link rel="preload" href="/assets/js/1.e1e77f42.js" as="script"><link rel="preload" href="/assets/js/30.7818df1e.js" as="script"><link rel="prefetch" href="/assets/js/10.161432e6.js"><link rel="prefetch" href="/assets/js/11.0f152647.js"><link rel="prefetch" href="/assets/js/12.0cbc75b1.js"><link rel="prefetch" href="/assets/js/13.49b737ac.js"><link rel="prefetch" href="/assets/js/14.93babe0f.js"><link rel="prefetch" href="/assets/js/15.a856a167.js"><link rel="prefetch" href="/assets/js/16.00d4fbeb.js"><link rel="prefetch" href="/assets/js/17.a1a7323d.js"><link rel="prefetch" href="/assets/js/18.71d71e1b.js"><link rel="prefetch" href="/assets/js/19.565c3806.js"><link rel="prefetch" href="/assets/js/20.895762e9.js"><link rel="prefetch" href="/assets/js/21.c20cfd40.js"><link rel="prefetch" href="/assets/js/22.b1eaa114.js"><link rel="prefetch" href="/assets/js/23.4e5233b7.js"><link rel="prefetch" href="/assets/js/24.6bb42f53.js"><link rel="prefetch" href="/assets/js/25.6b82d8dd.js"><link rel="prefetch" href="/assets/js/26.90155bed.js"><link rel="prefetch" href="/assets/js/27.382e4b56.js"><link rel="prefetch" href="/assets/js/28.b26fcf12.js"><link rel="prefetch" href="/assets/js/29.f28d7f45.js"><link rel="prefetch" href="/assets/js/31.754ab537.js"><link rel="prefetch" href="/assets/js/32.627e756e.js"><link rel="prefetch" href="/assets/js/33.120c9056.js"><link rel="prefetch" href="/assets/js/34.743f6db0.js"><link rel="prefetch" href="/assets/js/35.c5bcd4c1.js"><link rel="prefetch" href="/assets/js/36.2a128729.js"><link rel="prefetch" href="/assets/js/37.5fd65a10.js"><link rel="prefetch" href="/assets/js/38.1d3eb47b.js"><link rel="prefetch" href="/assets/js/39.8b02eab2.js"><link rel="prefetch" href="/assets/js/4.25ce20ae.js"><link rel="prefetch" href="/assets/js/40.6c4929b3.js"><link rel="prefetch" href="/assets/js/41.43bf4db3.js"><link rel="prefetch" href="/assets/js/42.af096912.js"><link rel="prefetch" href="/assets/js/43.8e64077f.js"><link rel="prefetch" href="/assets/js/44.c60cf0ba.js"><link rel="prefetch" href="/assets/js/45.27eac2a1.js"><link rel="prefetch" href="/assets/js/46.0fb3f8f8.js"><link rel="prefetch" href="/assets/js/47.528cbe93.js"><link rel="prefetch" href="/assets/js/48.0661e440.js"><link rel="prefetch" href="/assets/js/49.d634393b.js"><link rel="prefetch" href="/assets/js/5.3ace0281.js"><link rel="prefetch" href="/assets/js/6.6ccd4b8c.js"><link rel="prefetch" href="/assets/js/7.6dc42888.js"><link rel="prefetch" href="/assets/js/8.397f7c51.js"><link rel="prefetch" href="/assets/js/9.0a376aa1.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.807e3e1f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container" data-v-4698c43e><div data-v-4698c43e><div id="loader-wrapper" class="loading-wrapper" data-v-4b73742e data-v-4698c43e data-v-4698c43e><div class="loader-main" data-v-4b73742e><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-6cbeab0a data-v-4698c43e data-v-4698c43e><h3 class="title" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a>Eric Blog</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><input type="password" value="" data-v-6cbeab0a> <span data-v-6cbeab0a>Konck! Knock!</span> <button data-v-6cbeab0a>OK</button></label> <div class="footer" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><span data-v-6cbeab0a><i class="iconfont reco-theme" data-v-6cbeab0a></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-6cbeab0a>vuePress-theme-reco</a></span> <span data-v-6cbeab0a><i class="iconfont reco-copyright" data-v-6cbeab0a></i> <a data-v-6cbeab0a><span data-v-6cbeab0a>Eric Xue</span>
+            
+          <span data-v-6cbeab0a>2020 - </span>
+          2025
+        </a></span></div></div> <div class="hide" data-v-4698c43e><header class="navbar" data-v-4698c43e><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Eric Blog" class="logo"> <span class="site-name">Eric Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/CSS/" class="nav-link"><i class="iconfont undefined"></i>
+  CSS
+</a></li><li class="dropdown-item"><!----> <a href="/categories/DevTools/" class="nav-link"><i class="iconfont undefined"></i>
+  DevTools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Database/" class="nav-link"><i class="iconfont undefined"></i>
+  Database
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GameRules/" class="nav-link"><i class="iconfont undefined"></i>
+  GameRules
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS/" class="nav-link"><i class="iconfont undefined"></i>
+  JS
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Spring/" class="nav-link"><i class="iconfont undefined"></i>
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Threads/" class="nav-link"><i class="iconfont undefined"></i>
+  Threads
+</a></li><li class="dropdown-item"><!----> <a href="/categories/WorkFlow/" class="nav-link"><i class="iconfont undefined"></i>
+  WorkFlow
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/EricKWXue" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://blog.csdn.net/e_eric12138" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-csdn"></i>
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-4698c43e></div> <aside class="sidebar" data-v-4698c43e><div class="personal-info-wrapper" data-v-6c8ffc9c><img src="/avatar.png" alt="author-avatar" class="personal-img" data-v-6c8ffc9c> <h3 class="name" data-v-6c8ffc9c>
+    Eric Xue
+  </h3> <div class="num" data-v-6c8ffc9c><div data-v-6c8ffc9c><h3 data-v-6c8ffc9c>38</h3> <h6 data-v-6c8ffc9c>文章</h6></div> <div data-v-6c8ffc9c><h3 data-v-6c8ffc9c>22</h3> <h6 data-v-6c8ffc9c>标签</h6></div></div> <hr data-v-6c8ffc9c></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/CSS/" class="nav-link"><i class="iconfont undefined"></i>
+  CSS
+</a></li><li class="dropdown-item"><!----> <a href="/categories/DevTools/" class="nav-link"><i class="iconfont undefined"></i>
+  DevTools
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Database/" class="nav-link"><i class="iconfont undefined"></i>
+  Database
+</a></li><li class="dropdown-item"><!----> <a href="/categories/GameRules/" class="nav-link"><i class="iconfont undefined"></i>
+  GameRules
+</a></li><li class="dropdown-item"><!----> <a href="/categories/JS/" class="nav-link"><i class="iconfont undefined"></i>
+  JS
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Spring/" class="nav-link"><i class="iconfont undefined"></i>
+  Spring
+</a></li><li class="dropdown-item"><!----> <a href="/categories/Threads/" class="nav-link"><i class="iconfont undefined"></i>
+  Threads
+</a></li><li class="dropdown-item"><!----> <a href="/categories/WorkFlow/" class="nav-link"><i class="iconfont undefined"></i>
+  WorkFlow
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/EricKWXue" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://blog.csdn.net/e_eric12138" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-csdn"></i>
+  CSDN
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PostgreSQL高可用</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/DevTools/2025/012602.html#一-安装步骤" class="sidebar-link">一. 安装步骤</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/DevTools/2025/012602.html#二-创建用户和db" class="sidebar-link">二. 创建用户和DB</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/DevTools/2025/012602.html#三-修改配置文件" class="sidebar-link">三. 修改配置文件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/DevTools/2025/012602.html#_3-1-修改数据存储路径" class="sidebar-link">3.1 修改数据存储路径</a></li><li class="sidebar-sub-header"><a href="/views/DevTools/2025/012602.html#_3-2-定期备份" class="sidebar-link">3.2 定期备份</a></li></ul></li><li><a href="/views/DevTools/2025/012602.html#四-主从复制" class="sidebar-link">四. 主从复制</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/views/DevTools/2025/012602.html#_4-0-前置作业" class="sidebar-link">4.0 前置作业</a></li><li class="sidebar-sub-header"><a href="/views/DevTools/2025/012602.html#_4-1-主节点配置" class="sidebar-link">4.1 主节点配置</a></li><li class="sidebar-sub-header"><a href="/views/DevTools/2025/012602.html#_4-2-从节点配置" class="sidebar-link">4.2 从节点配置</a></li><li class="sidebar-sub-header"><a href="/views/DevTools/2025/012602.html#_4-3-主动切换" class="sidebar-link">4.3 主动切换</a></li></ul></li><li><a href="/views/DevTools/2025/012602.html#参考" class="sidebar-link">参考</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-6cbeab0a data-v-4698c43e><h3 class="title" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a>PostgreSQL高可用</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><input type="password" value="" data-v-6cbeab0a> <span data-v-6cbeab0a>Konck! Knock!</span> <button data-v-6cbeab0a>OK</button></label> <div class="footer" style="display:none;" data-v-6cbeab0a data-v-6cbeab0a><span data-v-6cbeab0a><i class="iconfont reco-theme" data-v-6cbeab0a></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-6cbeab0a>vuePress-theme-reco</a></span> <span data-v-6cbeab0a><i class="iconfont reco-copyright" data-v-6cbeab0a></i> <a data-v-6cbeab0a><span data-v-6cbeab0a>Eric Xue</span>
+            
+          <span data-v-6cbeab0a>2020 - </span>
+          2025
+        </a></span></div></div> <div data-v-4698c43e><main class="page"><!----> <div class="page-title" style="display:none;"><h1>PostgreSQL高可用</h1> <hr> <div data-v-484a899e><i class="iconfont reco-account" data-v-484a899e><span data-v-484a899e>Eric Xue</span></i> <i class="iconfont reco-date" data-v-484a899e><span data-v-484a899e>2025-01-26</span></i> <!----> <i class="iconfont reco-tag tags" data-v-484a899e><span class="tag-item" data-v-484a899e>
+      PostgreSQL
+    </span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h1 id="postgresql高可用"><a href="#postgresql高可用" class="header-anchor">#</a> PostgreSQL高可用</h1> <ul><li>yum安装前
+<ul><li>yum search java | grep -i --color jdk</li> <li>yum install -y java-1.8.0-openjdk-devel.x86_64</li></ul></li> <li>yum卸载前
+<ul><li>yum list installed | grep 'java|jdk|gcj|jre'</li> <li>yum -y remove java-1.8.0-openjdk-devel.x86_64</li></ul></li></ul> <h2 id="一-安装步骤"><a href="#一-安装步骤" class="header-anchor">#</a> 一. 安装步骤</h2> <ul><li>联网环境下，yum源安装（以CentOS8为例）</li></ul> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># Install the repository RPM:</span>
+<span class="token function">sudo</span> dnf <span class="token function">install</span> -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+<span class="token comment"># Disable the built-in PostgreSQL module:</span>
+<span class="token function">sudo</span> dnf -qy module disable postgresql
+
+<span class="token comment"># Install PostgreSQL:</span>
+<span class="token function">sudo</span> dnf <span class="token function">install</span> -y postgresql17-server
+
+<span class="token comment"># Optionally initialize the database and enable automatic start:</span>
+<span class="token function">sudo</span> /usr/pgsql-17/bin/postgresql-17-setup initdb
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> postgresql-17
+<span class="token function">sudo</span> systemctl start postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><ul><li>未联网下，yum源安装（以CentOS8为例）</li></ul> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># Install the repository RPM:</span>
+<span class="token function">sudo</span> dnf <span class="token function">install</span> -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+<span class="token comment"># 下载到postgresql17目录，然后打包导出，再导入到新server</span>
+<span class="token function">sudo</span> dnf <span class="token function">install</span> --downloadonly --downloaddir<span class="token operator">=</span>./postgresql17 postgresql17-server
+<span class="token function">sudo</span> dnf <span class="token function">install</span> --downloadonly --downloaddir<span class="token operator">=</span>./postgresql17 pgvector_17
+<span class="token function">sudo</span> dnf <span class="token function">install</span> --downloadonly --downloaddir<span class="token operator">=</span>./postgresql17 repmgr_17
+<span class="token comment">#打包</span>
+<span class="token function">zip</span> -r postgresql17.zip postgresql17
+<span class="token comment">#解包</span>
+<span class="token function">unzip</span> postgresql17.zip
+<span class="token comment"># 安装已经下载好的</span>
+<span class="token function">sudo</span> dnf <span class="token function">install</span> ./postgresql17/*.rpm
+<span class="token comment"># Optionally initialize the database and enable automatic start:</span>
+<span class="token function">sudo</span> /usr/pgsql-17/bin/postgresql-17-setup initdb
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> postgresql-17
+<span class="token function">sudo</span> systemctl start postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><ul><li>未联网下，rpm手动安装（以CentOS8为例）</li></ul> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 下载合适的版本</span>
+<span class="token comment"># https://yum.postgresql.org/rpmchart/</span>
+
+<span class="token comment"># 以15为例，页面四个包全部下载（下载依赖包）：https://yum.postgresql.org/15/redhat/rhel-7-x86_64/repoview/postgresqldbserver15.group.html</span>
+
+<span class="token comment"># 最终如下：</span>
+<span class="token comment"># libzstd-1.5.5-1.el7.x86_64.rpm</span>
+<span class="token comment"># lz4-1.8.3-1.el7.x86_64.rpm</span>
+<span class="token comment"># postgresql15-libs-15.5-1PGDG.rhel7.x86_64.rpm</span>
+<span class="token comment"># postgresql15-15.5-1PGDG.rhel7.x86_64.rpm</span>
+<span class="token comment"># postgresql15-server-15.5-1PGDG.rhel7.x86_64.rpm</span>
+
+<span class="token comment"># 依次安装</span>
+<span class="token function">rpm</span> -i *
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><h2 id="二-创建用户和db"><a href="#二-创建用户和db" class="header-anchor">#</a> 二. 创建用户和DB</h2> <div class="language-sql line-numbers-mode"><pre class="language-sql"><code><span class="token comment"># 切换到postgres</span>
+su <span class="token operator">-</span> postgres
+
+<span class="token comment"># 打开pgsql 如果有特殊端口 加上-p</span>
+psql
+
+<span class="token comment"># 执行sql，修改密码</span>
+<span class="token keyword">alter</span> <span class="token keyword">user</span> postgres <span class="token keyword">with</span> password <span class="token string">'XXX123zyx'</span><span class="token punctuation">;</span>
+
+<span class="token comment"># 创建用户和DB, 先不建schema，用默认的public即可</span>
+<span class="token keyword">create</span> <span class="token keyword">user</span> xue <span class="token keyword">with</span> password <span class="token string">'xue#0126'</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">database</span> xue owner xue<span class="token punctuation">;</span>
+<span class="token keyword">grant</span> <span class="token keyword">all</span> <span class="token keyword">privileges</span> <span class="token keyword">on</span> <span class="token keyword">database</span> xue <span class="token keyword">to</span> xue<span class="token punctuation">;</span>
+
+<span class="token comment"># 创建只读账号</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">USER</span> xue_rd <span class="token keyword">WITH</span> PASSWORD <span class="token string">'xue#012602'</span><span class="token punctuation">;</span>
+<span class="token keyword">alter</span> <span class="token keyword">user</span> xue_rd <span class="token keyword">set</span> default_transaction_read_only<span class="token operator">=</span><span class="token keyword">on</span><span class="token punctuation">;</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">CONNECT</span> <span class="token keyword">ON</span> <span class="token keyword">DATABASE</span> xue <span class="token keyword">TO</span> xue_rd<span class="token punctuation">;</span>
+\c xue
+<span class="token keyword">GRANT</span> <span class="token keyword">USAGE</span> <span class="token keyword">ON</span> <span class="token keyword">SCHEMA</span> <span class="token keyword">public</span> <span class="token keyword">TO</span> xue_rd<span class="token punctuation">;</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">SELECT</span> <span class="token keyword">ON</span> <span class="token keyword">ALL</span> <span class="token keyword">TABLES</span> <span class="token operator">IN</span> <span class="token keyword">SCHEMA</span> <span class="token keyword">public</span> <span class="token keyword">TO</span> xue_rd<span class="token punctuation">;</span>
+<span class="token keyword">ALTER</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">PRIVILEGES</span> <span class="token operator">IN</span> <span class="token keyword">SCHEMA</span> <span class="token keyword">public</span> <span class="token keyword">GRANT</span> <span class="token keyword">SELECT</span> <span class="token keyword">ON</span> <span class="token keyword">TABLES</span> <span class="token keyword">TO</span> xue_rd<span class="token punctuation">;</span>
+
+<span class="token comment"># 创建扩展</span>
+\c xue
+<span class="token keyword">CREATE</span> EXTENSION vector<span class="token punctuation">;</span>
+
+<span class="token comment"># 退出</span>
+\q
+
+<span class="token comment"># 再退出</span>
+<span class="token keyword">exit</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><h2 id="三-修改配置文件"><a href="#三-修改配置文件" class="header-anchor">#</a> 三. 修改配置文件</h2> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 把listen_addresses改为‘*'</span>
+<span class="token comment"># 把port改为54321</span>
+<span class="token comment"># 调优：</span>
+<span class="token comment"># DB Version: 17; OS Type: linux; DB Type: web; Total Memory (RAM): 16 GB; CPUs num: 8; Data Storage: hdd</span>
+<span class="token comment"># max_connections = 200</span>
+<span class="token comment"># shared_buffers = 4GB #系统内存的25%</span>
+<span class="token comment"># effective_cache_size = 8GB #系统内存的50%</span>
+<span class="token comment"># maintenance_work_mem = 512MB #配置为512MB</span>
+<span class="token comment"># checkpoint_completion_target = 0.9 #用于控制数据多久刷新写盘，默认0.9</span>
+<span class="token comment"># wal_buffers = 16MB #默认是shared_buffers的值除以32，这边直接设置成16MB</span>
+<span class="token comment"># default_statistics_target = 100 # 默认100</span>
+<span class="token comment"># random_page_cost = 4 #默认4.0</span>
+<span class="token comment"># effective_io_concurrency = 1 #默认1</span>
+<span class="token comment"># work_mem = 4MB， 推荐4M-16M</span>
+<span class="token comment"># huge_pages = off #默认try</span>
+<span class="token comment"># min_wal_size = 1GB # 用于控制pg里面的wal日志最大占用多大磁盘空间</span>
+<span class="token comment"># max_wal_size = 4GB # 用于控制pg里面的wal日志最大占用多大磁盘空间</span>
+<span class="token comment"># max_worker_processes = 8 #并发查询数量</span>
+<span class="token comment"># max_parallel_workers_per_gather = 2</span>
+<span class="token comment"># max_parallel_workers = 8</span>
+<span class="token comment"># max_parallel_maintenance_workers = 2</span>
+<span class="token function">vi</span> /var/lib/pgsql/17/data/postgresql.conf 
+
+<span class="token comment"># 添加：host all all all scram-sha-256</span>
+<span class="token comment"># IPv4 local connections:</span>
+<span class="token comment"># host    all             all             127.0.0.1/32            scram-sha-256</span>
+<span class="token comment"># host    xue             xue_rd          10.0.0.0/8              scram-sha-256</span>
+<span class="token comment"># host    xue             xue             192.168.211.0/24        scram-sha-256</span>
+<span class="token function">vi</span> /var/lib/pgsql/17/data/pg_hba.conf
+
+<span class="token comment"># 重启</span>
+systemctl restart postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><h3 id="_3-1-修改数据存储路径"><a href="#_3-1-修改数据存储路径" class="header-anchor">#</a> 3.1 修改数据存储路径</h3> <p>确认原始数据存储路径</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">su</span> - postgres
+psql -p <span class="token number">54321</span>
+<span class="token assign-left variable">postgres</span><span class="token operator">=</span><span class="token comment"># SHOW data_directory;</span>
+     data_directory     
+------------------------
+ /var/lib/pgsql/17/data
+<span class="token punctuation">(</span><span class="token number">1</span> row<span class="token punctuation">)</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>关停pgsql</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>systemctl stop postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>迁移数据</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">mkdir</span> -p /data/pgsql/17/
+<span class="token function">chown</span> -R postgres:postgres /data/pgsql/
+<span class="token comment"># 把原来的数据路径data拷贝到/17下</span>
+<span class="token function">cp</span> -a /var/lib/pgsql/17/data/ /data/pgsql/17/
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><p>修改存储路径</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>systemctl edit postgresql-17
+<span class="token comment"># 写入</span>
+<span class="token punctuation">[</span>Service<span class="token punctuation">]</span>
+<span class="token assign-left variable">Environment</span><span class="token operator">=</span>PGDATA<span class="token operator">=</span>/data/pgsql/17/data/
+<span class="token comment">#实际路径：/etc/systemd/system/postgresql-17.service.d/override.conf</span>
+<span class="token comment"># 启动</span>
+systemctl daemon-reload
+systemctl start postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><h3 id="_3-2-定期备份"><a href="#_3-2-定期备份" class="header-anchor">#</a> 3.2 定期备份</h3> <p>开启备份配置：archive_command和restore_command的最佳实践</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">mkdir</span> -p /data/pgsql/17/backup/pg_wal_archive
+<span class="token comment"># max_wal_senders = 10</span>
+<span class="token comment"># max_replication_slots = 10</span>
+<span class="token comment"># wal_level = 'replica'</span>
+<span class="token comment"># wal_log_hints = on</span>
+<span class="token comment"># hot_standby = on</span>
+<span class="token comment"># archive_mode = on</span>
+<span class="token comment"># archive_command = 'test ! -f /data/pgsql/17/backup/pg_wal_archive/%f &amp;&amp; cp %p /data/pgsql/17/backup/pg_wal_archive/%f'</span>
+<span class="token comment"># restore_command = 'cp /data/pgsql/17/backup/pg_wal_archive/%f %p'   # 恢复数据时，从哪里拷贝归档文件</span>
+<span class="token function">vi</span> /data/pgsql/17/data/postgresql.conf 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><h4 id="_3-2-1-逻辑备份与恢复"><a href="#_3-2-1-逻辑备份与恢复" class="header-anchor">#</a> 3.2.1 逻辑备份与恢复</h4> <ul><li>逻辑备份</li></ul> <p><code>/usr/pgsql-17/bin/pg_dump</code>或者<code>/usr/pgsql-17/bin/pg_dump/pg_dumpall</code>，导出数据到XXX.sql</p> <p>支持增量备份</p> <ul><li>逻辑恢复</li></ul> <p><code>/usr/pgsql-17/bin/pg_restore</code></p> <p>缺点：数据量大的时候，恢复太慢了，暂时不采用。</p> <h4 id="_3-2-2-物理备份与恢复"><a href="#_3-2-2-物理备份与恢复" class="header-anchor">#</a> 3.2.2 物理备份与恢复</h4> <p>全量备份</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>/usr/pgsql-17/bin/pg_basebackup -p <span class="token number">54321</span> -U repmgr -Ft -X stream -z -D /data/pgsql/17/backup/pg_backup/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y-%m-%d-FULL<span class="token variable">)</span></span> -v
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>备注：repmgr账号在<strong>4.1 主节点配置</strong>中因为已经配置好了，所以这边偷懒了直接拿来用。</p> <p>全量恢复</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 备份下现有数据</span>
+<span class="token function">mv</span> /data/pgsql/17/data/ /data/pgsql/17/data.bak/
+
+<span class="token comment"># 将基础备份解压到数据目录</span>
+<span class="token function">mkdir</span> /data/pgsql/17/data/
+<span class="token function">chmod</span> 0700 /data/pgsql/17/data/
+<span class="token function">tar</span> zxvf /data/pgsql/17/backup/pg_backup/2025-01-23-FULL/base.tar.gz -C /data/pgsql/17/data/
+<span class="token function">tar</span> zxvf /data/pgsql/17/backup/pg_backup/2025-01-23-FULL/pg_wal.tar.gz -C /data/pgsql/17/backup/pg_wal_archive/
+
+<span class="token comment"># 创建recovery.signal文件和standby.signal文件</span>
+<span class="token function">touch</span> /data/pgsql/17/data/recovery.signal
+<span class="token function">touch</span> /data/pgsql/17/data/standby.signal
+
+<span class="token comment"># 启动恢复数据库</span>
+systemctl start postgresql-17
+
+<span class="token comment"># 删除recovery.signal文件（如果需要读写，也要删除standby.signal文件），重启</span>
+<span class="token function">rm</span> -rf /data/pgsql/17/data/recovery.signal
+systemctl restart postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><ul><li>新方案：增量备份</li></ul> <p>采用17.2最新特性：开启WAL summarizer增量备份</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">vi</span> /data/pgsql/17/data/postgresql.conf 
+<span class="token comment"># summarize_wal = on</span>
+<span class="token comment"># wal_summary_keep_time = '10d'</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>基于全量备份，做增量备份</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>/usr/pgsql-17/bin/pg_basebackup -p <span class="token number">54321</span> -U repmgr -Ft -X stream -z -D /data/pgsql/17/backup/pg_backup/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> +%Y-%m-%d-INCR<span class="token variable">)</span></span> -v -i /data/pgsql/17/backup/pg_backup/2025-01-23-FULL/backup_manifest
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>全量+增量恢复</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 解压全量</span>
+<span class="token function">tar</span> zxvf /data/pgsql/17/backup/pg_backup/2025-01-23-FULL/base.tar.gz -C /data/pgsql/17/backup/pg_backup/2025-01-23-FULL-READY/
+<span class="token function">tar</span> zxvf /data/pgsql/17/backup/pg_backup/2025-01-23-FULL/pg_wal.tar.gz -C /data/pgsql/17/backup/pg_backup/2025-01-23-FULL-READY/pg_wal/
+<span class="token function">cp</span> /data/pgsql/17/backup/pg_backup/2025-01-23-FULL/backup_manifest /data/pgsql/17/backup/pg_backup/2025-01-23-FULL-READY/
+<span class="token comment"># 解压增量</span>
+<span class="token function">tar</span> zxvf /data/pgsql/17/backup/pg_backup/2025-01-23-INCR/base.tar.gz -C /data/pgsql/17/backup/pg_backup/2025-01-23-INCR-READY/
+<span class="token function">tar</span> zxvf /data/pgsql/17/backup/pg_backup/2025-01-23-INCR/pg_wal.tar.gz -C /data/pgsql/17/backup/pg_backup/2025-01-23-INCR-READY/pg_wal/
+<span class="token function">cp</span> /data/pgsql/17/backup/pg_backup/2025-01-23-INCR/backup_manifest /data/pgsql/17/backup/pg_backup/2025-01-23-INCR-READY/
+
+<span class="token comment">#合并全量和增量</span>
+/usr/pgsql-17/bin/pg_combinebackup <span class="token number">2025</span>-01-23-FULL-READY <span class="token number">2025</span>-01-23-INCR-READY -o <span class="token number">2025</span>-01-23-RESTORE-FULL
+
+<span class="token comment"># 备份下现有数据</span>
+<span class="token function">mv</span> /data/pgsql/17/data/ /data/pgsql/17/data.bak/
+
+<span class="token comment">#执行恢复数据库</span>
+<span class="token function">mv</span> /data/pgsql/17/backup/pg_backup/2025-01-23-RESTORE-FULL/ /data/pgsql/17/data/
+<span class="token function">touch</span> /data/pgsql/17/data/standby.signal
+systemctl start postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><h4 id="_3-2-3-备份脚本"><a href="#_3-2-3-备份脚本" class="header-anchor">#</a> 3.2.3 备份脚本</h4> <p>定时物理备份脚本：采用每周六全备 + 每周日~周五增量备份的策略，有效备份保留1个月</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">mkdir</span> -p /data/pgsql/17/backup/bin
+
+<span class="token comment"># 备份脚本</span>
+<span class="token function">vi</span> /data/pgsql/17/backup/bin/backup.sh
+<span class="token function">chmod</span> +x /data/pgsql/17/backup/bin/backup.sh
+<span class="token comment">#!/bin/bash</span>
+
+<span class="token comment">#PostgreSQL env settings</span>
+
+<span class="token assign-left variable">BAK_BASE</span><span class="token operator">=</span><span class="token string">&quot;/data/pgsql/17/backup/pg_backup&quot;</span>
+<span class="token comment"># 2023-05-02</span>
+<span class="token assign-left variable">DATE</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> +%F<span class="token variable">`</span></span>
+<span class="token comment"># 2023-05-01</span>
+<span class="token assign-left variable">YESTERDAY</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> +%F -d <span class="token string">&quot;-1 days&quot;</span><span class="token variable">`</span></span>
+<span class="token comment"># 0代表周日，6代表周六</span>
+<span class="token assign-left variable">WEEK_DAY</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> +%w<span class="token variable">`</span></span>
+<span class="token assign-left variable">BAK_DIR</span><span class="token operator">=</span><span class="token variable">$BAK_BASE</span>/<span class="token variable">$DATE</span>-<span class="token variable">$WEEK_DAY</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+<span class="token assign-left variable">START_TIME</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;############## Physical backup start at <span class="token variable">$START_TIME</span> ##############&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$WEEK_DAY</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;6&quot;</span>  <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+		/usr/pgsql-17/bin/pg_basebackup -p <span class="token number">54321</span> -U repmgr -Ft -X stream -z -D <span class="token variable">$BAK_DIR</span> -v
+        <span class="token assign-left variable">TYPE</span><span class="token operator">=</span><span class="token string">&quot;FULL&quot;</span>
+<span class="token keyword">elif</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$WEEK_DAY</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;0&quot;</span>  <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token assign-left variable">INCRE_BASE</span><span class="token operator">=</span><span class="token variable">$BAK_BASE</span>/<span class="token variable">$YESTERDAY</span>-6
+        /usr/pgsql-17/bin/pg_basebackup -p <span class="token number">54321</span> -U repmgr -Ft -X stream -z -D <span class="token variable">$BAK_DIR</span> -v -i <span class="token variable">$INCRE_BASE</span>/backup_manifest
+        <span class="token assign-left variable">TYPE</span><span class="token operator">=</span><span class="token string">&quot;INCR&quot;</span>
+<span class="token keyword">else</span>
+        <span class="token assign-left variable">INCRE_BASE</span><span class="token operator">=</span><span class="token variable">$BAK_BASE</span>/<span class="token variable">$YESTERDAY</span>-$<span class="token punctuation">[</span>WEEK_DAY-1<span class="token punctuation">]</span>
+        /usr/pgsql-17/bin/pg_basebackup -p <span class="token number">54321</span> -U repmgr -Ft -X stream -z -D <span class="token variable">$BAK_DIR</span> -v -i <span class="token variable">$INCRE_BASE</span>/backup_manifest
+        <span class="token assign-left variable">TYPE</span><span class="token operator">=</span><span class="token string">&quot;INCR&quot;</span>
+<span class="token keyword">fi</span>
+
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+<span class="token assign-left variable">END_TIME</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;############## Physical backup end at <span class="token variable">$END_TIME</span> ##############&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+
+<span class="token assign-left variable">SIZE</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">du</span> -sh $BAK_DIR <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$1</span>}'</span><span class="token variable">`</span></span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$?</span> -eq <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;Backup completed successfully.&quot;</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;Backup is available at: <span class="token variable">$BAK_DIR</span>/backup_label&quot;</span>
+    <span class="token builtin class-name">printf</span> <span class="token string">&quot;|------------------------------------------|--------|---------------------|---------------------|------------|<span class="token entity" title="\n">\n</span>&quot;</span>
+    <span class="token builtin class-name">printf</span> <span class="token string">&quot;| %-40s | %-6s | %-19s | %-19s | %-10s |<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token punctuation">\</span>
+            <span class="token string">&quot;Label&quot;</span> <span class="token string">&quot;Type&quot;</span> <span class="token string">&quot;Start Timestamp&quot;</span> <span class="token string">&quot;Stop Timestamp&quot;</span> <span class="token string">&quot;Size&quot;</span>
+    <span class="token builtin class-name">printf</span> <span class="token string">&quot;|------------------------------------------|--------|---------------------|---------------------|------------|<span class="token entity" title="\n">\n</span>&quot;</span>
+    <span class="token builtin class-name">printf</span> <span class="token string">&quot;| %-40s | %-6s | %-19s | %-19s | %-10s |<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token punctuation">\</span>
+            <span class="token string">&quot;<span class="token variable">$BAK_DIR</span>/backup_label&quot;</span> <span class="token string">&quot;<span class="token variable">$TYPE</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$START_TIME</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$END_TIME</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$SIZE</span>&quot;</span>
+    <span class="token builtin class-name">printf</span> <span class="token string">&quot;|------------------------------------------|--------|---------------------|---------------------|------------|<span class="token entity" title="\n">\n</span>&quot;</span>
+<span class="token keyword">else</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;Backup failed.&quot;</span>
+<span class="token builtin class-name">exit</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 清理脚本</span>
+<span class="token function">vim</span>  /data/pgsql/17/backup/bin/cleanup.sh
+<span class="token function">chmod</span> +x /data/pgsql/17/backup/bin/cleanup.sh
+<span class="token comment">#!/bin/bash</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+<span class="token assign-left variable">START_TIME</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;############## clean up start at <span class="token variable">$START_TIME</span> ##############&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+
+<span class="token function">find</span> /data/pgsql/17/backup/pg_backup -maxdepth <span class="token number">1</span> -type d -mtime +30
+<span class="token function">find</span> /data/pgsql/17/backup/pg_backup -maxdepth <span class="token number">1</span> -type d -mtime +30 -exec <span class="token function">rm</span> -rf <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+<span class="token assign-left variable">END_TIME</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;############## clean up end at <span class="token variable">$END_TIME</span> ##############&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br></div></div><p>设置定时器</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">crontab</span> -l 
+<span class="token number">30</span> <span class="token number">0</span> * * * /data/pgsql/17/backup/bin/backup.sh <span class="token operator">&gt;&gt;</span> /data/pgsql/17/backup/bin/backup.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> 
+00 08 * * <span class="token number">6</span> /data/pgsql/17/backup/bin/cleanup.sh <span class="token operator">&gt;&gt;</span> /data/pgsql/17/backup/bin/cleanup.log <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h2 id="四-主从复制"><a href="#四-主从复制" class="header-anchor">#</a> 四. 主从复制</h2> <p>采用repmgr，文档：https://www.repmgr.org/docs/5.5/installation-packages.html#INSTALLATION-PACKAGES-REDHAT</p> <p>主节点（192.168.211.1）支持增删改查，从节点（192.168.211.2）只支持查询！</p> <h3 id="_4-0-前置作业"><a href="#_4-0-前置作业" class="header-anchor">#</a> 4.0 前置作业</h3> <h4 id="_4-0-1-ssh免密登录"><a href="#_4-0-1-ssh免密登录" class="header-anchor">#</a> 4.0.1 ssh免密登录</h4> <p>允许所有账号免密登录</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">vi</span> /etc/ssh/sshd_config
+<span class="token comment"># PubkeyAuthentication no</span>
+
+<span class="token comment">#重启sshd服务</span>
+systemctl restart sshd
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>或者：允许固定账号的ssh免密登录</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">vi</span> /etc/ssh/sshd_config
+<span class="token comment"># PubkeyAuthentication no</span>
+<span class="token comment"># Match Address &lt;固定IP&gt; User &lt;账号&gt; PubkeyAuthentication yes</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>两台机器分别生成公私钥，并执行拷贝。实现postgres这个账号的互相ssh免密访问</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">su</span> - postgres
+ssh-keygen -t rsa
+ssh-copy-id -i ~/.ssh/id_rsa.pub <span class="token number">192.168</span>.211.1
+<span class="token comment"># ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.211.2</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="_4-0-2-pg-rewind开启"><a href="#_4-0-2-pg-rewind开启" class="header-anchor">#</a> 4.0.2 pg_rewind开启</h4> <p>使用pg_rewind需要打开配置wal_log_hints=on，full_page_writes=on。在pgsql-17.2版本中默认开启的。</p> <p>pg_rewind同步数据主要依赖wal日志，位于$PGDATA/pg_wal目录中，因为打开了archive_mode=on，如果没有配置archive_command，日志会越来越大。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># $PGDATA=/data/pgsql/17/data/</span>
+/usr/pgsql-17/bin/pg_controldata <span class="token variable">$PGDATA</span>
+
+<span class="token comment">#Latest checkpoint's REDO WAL file:    00000001000000010000000E</span>
+<span class="token comment">#表示00000001000000010000000E之前的pg_wal文件可以删除，执行删除</span>
+/usr/pgsql-17/bin/pg_archivecleanup -d <span class="token variable">$PGDATA</span>/pg_wal 00000001000000010000000E 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><h4 id="_4-0-3-keepalived开启"><a href="#_4-0-3-keepalived开启" class="header-anchor">#</a> 4.0.3 keepalived开启</h4> <p>两台机器都得安装，把主节点配置成master节点。</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 安装</span>
+dnf <span class="token function">install</span> keepalived
+
+<span class="token comment"># 修改配置</span>
+<span class="token function">vi</span> /etc/keepalived/keepalived.conf
+<span class="token comment"># ! Configuration File for keepalived</span>
+
+<span class="token comment"># vrrp_instance VI_1 {</span>
+<span class="token comment">#     state BACKUP</span>
+<span class="token comment">#     interface eth0</span>
+<span class="token comment">#     virtual_router_id 25</span>
+<span class="token comment">#     priority 100 #master配置为100，backup配置为90</span>
+<span class="token comment">#     advert_int 1</span>
+<span class="token comment">#     authentication {</span>
+<span class="token comment">#         auth_type PASS</span>
+<span class="token comment">#         auth_pass 852963741</span>
+<span class="token comment">#     }</span>
+<span class="token comment">#     unicast_src_ip 192.168.211.1 #当前机器</span>
+<span class="token comment">#     unicast_peer {</span>
+<span class="token comment">#         192.168.211.2  #对方机器</span>
+<span class="token comment">#     }</span>
+<span class="token comment">#     virtual_ipaddress {</span>
+<span class="token comment">#         192.168.211.3 #虚拟ip</span>
+<span class="token comment">#     }</span>
+<span class="token comment"># }</span>
+
+<span class="token comment">#启动</span>
+systemctl start keepalived
+systemctl <span class="token builtin class-name">enable</span> keepalived
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><h3 id="_4-1-主节点配置"><a href="#_4-1-主节点配置" class="header-anchor">#</a> 4.1 主节点配置</h3> <p>开启备份日志</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">mkdir</span> -p /data/pgsql/17/backup/pg_wal_archive
+<span class="token comment"># max_wal_senders = 10</span>
+<span class="token comment"># max_replication_slots = 10</span>
+<span class="token comment"># wal_level = 'replica'</span>
+<span class="token comment"># wal_log_hints = on</span>
+<span class="token comment"># hot_standby = on</span>
+<span class="token comment"># archive_mode = on</span>
+<span class="token comment"># archive_command = 'test ! -f /data/pgsql/17/backup/pg_wal_archive/%f &amp;&amp; cp %p /data/pgsql/17/backup/pg_wal_archive/%f'</span>
+<span class="token comment"># restore_command = 'cp /data/pgsql/17/backup/pg_wal_archive/%f %p'</span>
+<span class="token function">vi</span> /data/pgsql/17/data/postgresql.conf 
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p>创建用于备份的用户</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 创建repmgrDB与用户</span>
+<span class="token function">su</span> - postgres
+createuser -p <span class="token number">54321</span> -s repmgr
+createdb -p <span class="token number">54321</span> repmgr -O repmgr
+psql -p <span class="token number">54321</span>
+<span class="token assign-left variable">postgres</span><span class="token operator">=</span><span class="token comment"># ALTER USER repmgr SET search_path TO repmgr, &quot;$user&quot;, public;</span>
+<span class="token assign-left variable">postgres</span><span class="token operator">=</span><span class="token comment"># \q</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br></div></div><p>主从节点相互信任</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment">#    local   replication   repmgr                              trust</span>
+<span class="token comment">#    host    replication   repmgr      127.0.0.1/32            trust</span>
+<span class="token comment">#    host    replication   repmgr      192.168.211.1/32      trust</span>
+<span class="token comment">#    host    replication   repmgr      192.168.211.2/32      trust</span>
+<span class="token comment">#    local   repmgr        repmgr                              trust</span>
+<span class="token comment">#    host    repmgr        repmgr      127.0.0.1/32            trust</span>
+<span class="token comment">#    host    repmgr        repmgr      192.168.211.1/32      trust</span>
+<span class="token comment">#    host    repmgr        repmgr      192.168.211.2/32      trust</span>
+<span class="token function">vi</span> /data/pgsql/17/data/pg_hba.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>配置repmgr</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># node_id=1</span>
+<span class="token comment"># node_name='node1'</span>
+<span class="token comment"># conninfo='host=192.168.211.1 port=54321 user=repmgr dbname=repmgr connect_timeout=2'</span>
+<span class="token comment"># data_directory='/data/pgsql/17/data'</span>
+<span class="token function">vi</span> /etc/repmgr/17/repmgr.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>注册主机点</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf primary register&quot;</span>
+<span class="token comment"># 查看状态</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr service status&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_4-2-从节点配置"><a href="#_4-2-从节点配置" class="header-anchor">#</a> 4.2 从节点配置</h3> <p>测试能否访问主节点</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">su</span> - postgres -c <span class="token string">&quot;psql 'host=192.168.211.1 port=54321 user=repmgr dbname=repmgr connect_timeout=2'&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>创建归档目录</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">mkdir</span> -p /data/pgsql/17/backup/pg_wal_archive
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>配置repmgr</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># node_id=2</span>
+<span class="token comment"># node_name='node2'</span>
+<span class="token comment"># conninfo='host=192.168.211.2 port=54321 user=repmgr dbname=repmgr connect_timeout=2'</span>
+<span class="token comment"># data_directory='/data/pgsql/17/data'</span>
+<span class="token function">vi</span> /etc/repmgr/17/repmgr.conf
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br></div></div><p>拷贝主节点配置文件</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 测试主节点是否能通</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -h 192.168.211.1 -p 54321 -U repmgr -d repmgr -f /etc/repmgr/17/repmgr.conf standby clone --dry-run&quot;</span>
+
+<span class="token comment"># 执行拷贝</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -h 192.168.211.1 -p 54321 -U repmgr -d repmgr -f /etc/repmgr/17/repmgr.conf standby clone&quot;</span>
+
+<span class="token comment">#启动</span>
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> postgresql-17
+<span class="token function">sudo</span> systemctl start postgresql-17
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br></div></div><p>连接主节点查询备份机情况</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code>psql -U repmgr -p <span class="token number">54321</span> -h <span class="token number">192.168</span>.211.1 -d repmgr
+<span class="token assign-left variable">repmgr</span><span class="token operator">=</span><span class="token comment"># SELECT * FROM pg_stat_replication;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>注册从节点</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf standby register&quot;</span>
+<span class="token comment"># 查看集群状态</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf cluster show&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><h3 id="_4-3-主动切换"><a href="#_4-3-主动切换" class="header-anchor">#</a> 4.3 主动切换</h3> <p>暂不设定故障自动切换，容易出现脑裂情况。手动切换比较安全！</p> <h4 id="_4-3-1-启用备用节点"><a href="#_4-3-1-启用备用节点" class="header-anchor">#</a> 4.3.1 启用备用节点</h4> <p>当主节点（node1）挂掉后，手动切换从节点（node2）为主节点</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 将备用机（node2）提升为主节点</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf standby promote&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>keepalived优先级调高</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 将备用机（node2）的keepalived优先级调高</span>
+<span class="token function">vi</span> /etc/keepalived/keepalived.conf
+<span class="token comment">#     priority 110</span>
+systemctl restart keepalived
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h4 id="_4-3-2-恢复旧主节点"><a href="#_4-3-2-恢复旧主节点" class="header-anchor">#</a> 4.3.2 恢复旧主节点</h4> <p>修复好主节点（node1）后，让主节点（node1）重新变为主节点。以下操作全在node1上执行：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 1.关停node1服务</span>
+systemctl stop postgresql-17
+<span class="token comment"># 2.重新加入集群, 成为从节点。如果失败 就只能执行2.1、2.2、2.3、2.4进行全拷贝了</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf node rejoin -d 'host=192.168.211.2 port=54321 user=repmgr dbname=repmgr' --force-rewind&quot;</span>
+<span class="token comment"># 2.1 测试拷贝从节点（node2）的数据到主节点（node1）</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -h 192.168.211.2 -p 54321 -U repmgr -d repmgr -f /etc/repmgr/17/repmgr.conf standby clone --dry-run&quot;</span>
+<span class="token comment"># 2.2 执行拷贝</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -h 192.168.211.2 -p 54321 -U repmgr -d repmgr -f /etc/repmgr/17/repmgr.conf standby clone --force&quot;</span>
+<span class="token comment"># 2.3 开启node1</span>
+systemctl start postgresql-17
+<span class="token comment"># 2.4 把node1先重新注册为从节点</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf standby register --force&quot;</span>
+
+<span class="token comment"># 3.最后一步：主从交换(需要两台机器ssh免密登录，账号：postgres)</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf standby switchover --remote-user=postgres --always-promote --force-rewind&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>如果最后一步调用repmgr standby switchover一直报错，可以采用手动切换。需要切换node1、node2机器分别执行不同的命令：</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># 1（在node2上执行）停止node2服务</span>
+systemctl stop postgresql-17
+<span class="token comment"># 2（在node1上执行）node1 promote成主节点</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf standby promote&quot;</span>
+<span class="token comment"># 3.（在node2上执行）重新加入集群, 成为从节点。如果失败 就只能执行3.1、3.2、3.3进行全拷贝了</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf node rejoin -d 'host=192.168.211.2 port=54321 user=repmgr dbname=repmgr' --force-rewind&quot;</span>
+<span class="token comment"># 3.1（在node2上执行）执行拷贝</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -h 192.168.211.1 -p 54321 -U repmgr -d repmgr -f /etc/repmgr/17/repmgr.conf standby clone --force&quot;</span>
+<span class="token comment"># 3.2（在node2上执行）开启node2服务</span>
+systemctl start postgresql-17
+<span class="token comment"># 3.3（在node2上执行）重新注册node2为从节点</span>
+<span class="token function">su</span> - postgres -c <span class="token string">&quot;/usr/pgsql-17/bin/repmgr -f /etc/repmgr/17/repmgr.conf standby register --force&quot;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>keepalived优先级恢复</p> <div class="language-shell line-numbers-mode"><pre class="language-shell"><code><span class="token comment"># （在node2上执行）keepalived优先级调低</span>
+<span class="token function">vi</span> /etc/keepalived/keepalived.conf
+<span class="token comment">#     priority 90</span>
+systemctl restart keepalived
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><h2 id="参考"><a href="#参考" class="header-anchor">#</a> 参考</h2> <ol><li><a href="https://www.repmgr.org/docs/5.5/index.html" target="_blank" rel="noopener noreferrer">repmgr 5.5.0 Documentation<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://www.postgresql.org/docs/17/index.html" target="_blank" rel="noopener noreferrer">PostgreSQL 17.2 Documentation<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://www.modb.pro/db/1863847640195149824" target="_blank" rel="noopener noreferrer">PostgreSQL 17 增量备份<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ol></div> <footer class="page-edit" style="display:none;"><!----> <!----></footer> <!----> <!----></main> <!----> <div class="comments-wrapper" data-v-4698c43e><!----></div></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-a81d141e data-v-a81d141e><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-a81d141e><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-a81d141e></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-a81d141e></path></svg></div></div></div>
+    <script src="/assets/js/app.cda6d5d2.js" defer></script><script src="/assets/js/3.e2fc40bf.js" defer></script><script src="/assets/js/1.e1e77f42.js" defer></script><script src="/assets/js/30.7818df1e.js" defer></script>
+  </body>
+</html>
